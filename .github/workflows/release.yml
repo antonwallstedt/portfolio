@@ -4,28 +4,18 @@ on:
     branches:
       - main
 jobs:
-  Tag:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
         with:
-          fetch-depth: 0
-      - name: Semantic Versioning
-        uses: paulhatch/semantic-version@v5.3.0
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create GitHub release
+        uses: ncipollo/release-action@v1.14.0
         with:
-          tag_prefix: "v"
-          major_pattern: "feat!:"
-          major_regexp_flags: ""
-          minor_pattern: "feat:"
-          minor_regexp_flags: ""
-          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
-          change_path: ""
-          namespace: portfolio
-          bump_each_commit: false
-          bump_each_commit_patch_pattern: ""
-          search_commit_body: false
-          user_format_type: "csv"
-          enable_prerelease_mode: true
-          debug: false
-          version_from_branch: false
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
