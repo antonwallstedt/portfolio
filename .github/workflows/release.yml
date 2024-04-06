@@ -7,7 +7,12 @@ jobs:
   Tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: paulhatch/semantic-version@v5.3.0
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Semantic Versioning
+        uses: paulhatch/semantic-version@v5.3.0
         with:
           tag_prefix: "v"
           major_pattern: "feat!:"
