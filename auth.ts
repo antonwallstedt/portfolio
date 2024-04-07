@@ -4,9 +4,11 @@ import { authConfig } from "./auth.config";
 import { z } from "zod";
 import { User, UserDocument } from "@/app/models/User";
 import bcrypt from "bcrypt";
+import { connectToDatabase } from "@/app/lib/mongodb";
 
 async function getUser(username: string): Promise<UserDocument | null> {
   try {
+    connectToDatabase();
     const user = await User.findOne({ username: username });
     return user;
   } catch (err) {
