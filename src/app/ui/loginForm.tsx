@@ -1,12 +1,15 @@
 "use client";
 
 import { ArrowRightIcon, ExclamationCircleIcon, KeyIcon, UsersIcon } from "@heroicons/react/16/solid";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "./button";
+import { authenticate } from "../lib/actions";
 
 export default function LoginForm() {
+  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+
   return (
-    <form className="space-y-3">
+    <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className="mb-3 text-2xl text-gray-900">Please log in.</h1>
         <div className="w-full">
@@ -43,13 +46,13 @@ export default function LoginForm() {
           </div>
           <LoginButton />
         </div>
-        <div>
-          {/* {errorMessage && (
+        <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
+          {errorMessage && (
             <>
               <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
               <p className="text-sm text-red-500">{errorMessage}</p>
             </>
-          )} */}
+          )}
         </div>
       </div>
     </form>
