@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
-var mongoose = require("mongoose");
-mongoose.connect(process.env.MONGODB_URI);
+import { ThemeProvider } from "@/app/ui/themeExporter.tsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <head />
+      <ThemeProvider>
+        <body className={`${inter.className} antialiased`}>{children}</body>
+      </ThemeProvider>
     </html>
   );
 }
