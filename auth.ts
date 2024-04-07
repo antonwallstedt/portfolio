@@ -2,20 +2,16 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
 import { z } from "zod";
-import type { User } from "@/app/lib/definitions";
+import { User, UserDocument } from "@/app/models/User";
 import bcrypt from "bcrypt";
 
-var mongoose = require("mongoose");
-
-async function getUser(username: string): Promise<User | undefined> {
+async function getUser(username: string): Promise<UserDocument | null> {
   try {
-    const user = await mongoose.models.User.findOne({ username: "AntonAdministrator" });
-    return {
-      name: user.username,
-      password: user.password,
-    };
+    const user = await User.findOne({ username: username });
+    return user;
   } catch (err) {
     console.error("failed to fetch user");
+    return null;
   }
 }
 
@@ -25,7 +21,6 @@ export const { auth, signIn, signOut } = NextAuth({
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z.object({ username: z.string(), password: z.string().min(6) }).safeParse(credentials);
-
         if (parsedCredentials.success) {
           const { username, password } = parsedCredentials.data;
           const user = await getUser(username);
