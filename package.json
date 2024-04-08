@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
-    "@material-tailwind/react": "2.1.8",
     "@tailwindcss/forms": "^0.5.7",
     "@types/node": "20.5.7",
     "@vercel/postgres": "^0.5.1",
@@ -39,7 +38,8 @@
     "eslint-config-next": "^14.0.0",
     "eslint-config-prettier": "9.0.0",
     "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "0.5.4"
+    "prettier-plugin-tailwindcss": "0.5.4",
+    "tailwind-material-colors": "^2.0.2"
   },
   "engines": {
     "node": ">=18.17.0"

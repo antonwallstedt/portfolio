@@ -1,8 +1,15 @@
 import type { Config } from "tailwindcss";
 
-const withMT = require("@material-tailwind/react/utils/withMT");
+import { withMaterialColors } from "tailwind-material-colors";
 
-const config: Config = withMT({
+const colors = {
+  primary: "#765b00",
+  secondary: "#d6c5a0",
+  tertiary: "#aecfac",
+  error: "#ffb4ab",
+};
+
+const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -19,5 +26,5 @@ const config: Config = withMT({
     },
   },
   plugins: [],
-});
-export default config;
+};
+export default withMaterialColors(config, colors, { extend: false });
