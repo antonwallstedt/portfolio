@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/app/ui/themeExporter.tsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head />
-      <ThemeProvider>
-        <body className={`${inter.className} antialiased`}>{children}</body>
-      </ThemeProvider>
+      <body className={`${inter.className} antialiased bg-background`}>{children}</body>
     </html>
   );
 }
