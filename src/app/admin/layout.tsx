@@ -1,10 +1,5 @@
-import SideNav from "@/app/ui/AdminDash/sidenav";
-import { Metadata } from "next";
+import SideNav from "@/app/ui/home/sidenav";
 import React from "react";
-
-export const metadata: Metadata = {
-  title: "Home",
-};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

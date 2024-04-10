@@ -22,7 +22,7 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx("flex h-[48px] grow items-center justify-center gap-2 rounded-md interactive-bg-surface-variant p-3 text-sm font-medium  md:flex-none md:justify-start md:p-2 md:px-3", {
-              "bg-tertiary-container text-on-tertiary-container": pathname === link.href,
+              "bg-primary-container text-on-primary-container": pathname === link.href,
             })}
           >
             <LinkIcon className="w-6" />
