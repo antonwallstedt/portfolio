@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
 import { z } from "zod";
-import { User, UserDocument } from "@/app/models/User";
+import { User, UserDocument } from "@/app/models/user";
 import bcrypt from "bcrypt";
 import { connectToDatabase } from "@/app/lib/mongodb";
 
