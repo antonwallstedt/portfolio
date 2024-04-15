@@ -3,10 +3,10 @@ import type { Config } from "tailwindcss";
 import { withMaterialColors } from "tailwind-material-colors";
 
 const colors = {
-  primary: "#765b00",
-  secondary: "#d6c5a0",
-  tertiary: "#aecfac",
-  error: "#ffb4ab",
+  primary: "#576421",
+  secondary: "#5C6146",
+  tertiary: "#3A665D",
+  error: "#BA1A1A",
 };
 
 const config: Config = {
@@ -27,4 +27,4 @@ const config: Config = {
   },
   plugins: [],
 };
-export default withMaterialColors(config, colors, { extend: false });
+export default withMaterialColors(config, colors, { extend: true });

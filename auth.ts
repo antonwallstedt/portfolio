@@ -24,7 +24,6 @@ export const { auth, signIn, signOut } = NextAuth({
       async authorize(credentials) {
         const parsedCredentials = z.object({ username: z.string(), password: z.string().min(6) }).safeParse(credentials);
         if (parsedCredentials.success) {
-          console.log(parsedCredentials);
           const { username, password } = parsedCredentials.data;
           const user = await getUser(username);
           if (!user) return null;

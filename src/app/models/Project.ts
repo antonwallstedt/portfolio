@@ -9,6 +9,16 @@ const projectSchema = new mongoose.Schema({
   stack: [String],
 });
 
+export type ProjectDocumentType = {
+  id: string;
+  title: string;
+  subtitle: string;
+  imageSrc: string;
+  description: string;
+  longDescription: string;
+  stack: [string];
+};
+
 interface ProjectDocument extends Document {
   title: string;
   subtitle: string;

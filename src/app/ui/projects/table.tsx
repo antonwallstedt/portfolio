@@ -1,46 +1,25 @@
 import { fetchProjects } from "@/app/lib/data";
-import Image from "next/image";
+import { Cog6ToothIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default async function ProjectsTable() {
   const projects = await fetchProjects();
   return (
-    <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
-        <div className="rounded-lg bg-surface-variant p-2 md:pt-0">
-          <table className="hidden min-w-full bg-surface-variant md:table">
-            <thead className="rounded-lg text-left text-md">
-              <tr>
-                <th scope="col" />
-                <th scope="col">Title</th>
-                <th scope="col">Subtitle</th>
-                <th scope="col">Stack</th>
-                <th scope="col">
-                  <span className="sr-only">Edit</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-surface-variant">
-              {projects?.map((project) => (
-                <tr
-                  key={project.id}
-                  className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
-                >
-                  <td className="whitespace-nowrap p-2">
-                    <img src={project.imageSrc} className="rounded-md" width={100} height={100} alt={`${project.title}'s profile picture`} />{" "}
-                  </td>
-                  <td className="whitespace-nowrap py-3">{project.title}</td>
-                  <td className="whitespace-nowrap py-3">{project.subtitle}</td>
-                  <td className="whitespace-nowrap py-3">
-                    {project.stack.map((tech, i) => (
-                      <span key={i}>{tech} </span>
-                    ))}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <div className="mt-6 flex flex-wrap justify-center items-center w-full p-5 rounded-md">
+      {projects?.map((project) => (
+        <div key={project.id} className="flex m-5 bg-neutral-100 rounded-md p-3 drop-shadow-md w-[50%]">
+          <img src={project.imageSrc} width={200} height={200} className="rounded-md" />
+          <div className="ml-5 relative drop-shadow-sm">
+            <h1 className="text-xl font-medium mb-2">{project.title}</h1>
+            <p className="text-lg mb-4">{project.subtitle}</p>
+            <p className="mb-4">{project.description}</p>
+            <Link href={`/admin/dashboard/projects/${project.id}/edit`} className="bg-neutral-200 px-3 py-1 rounded-md flex items-center text-sm absolute bottom-0">
+              Edit <Cog6ToothIcon width={15} className="ml-2" />
+            </Link>
+            {/* <button className="bg-neutral-200 px-3 py-1 rounded-md flex items-center text-sm absolute bottom-0"></button> */}
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }

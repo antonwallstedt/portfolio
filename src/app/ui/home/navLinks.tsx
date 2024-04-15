@@ -9,27 +9,26 @@ const links = [
   { name: "Home", href: "/admin/dashboard/home", icon: HomeIcon },
   { name: "Projects", href: "/admin/dashboard/projects", icon: PencilIcon },
   { name: "Timeline", href: "/admin/dashboard/timeline", icon: ClockIcon },
+  { name: "Experience", href: "/admin/dashboard/experience", icon: ClockIcon },
 ];
 
 export default function NavLinks() {
   const pathname = usePathname();
   return (
-    <>
+    <div className="flex space-x-36 drop-shadow-sm">
       {links.map((link) => {
-        const LinkIcon = link.icon;
         return (
           <Link
             key={link.name}
             href={link.href}
-            className={clsx("flex h-[48px] grow items-center justify-center gap-2 rounded-md interactive-bg-surface-variant p-3 text-sm font-medium  md:flex-none md:justify-start md:p-2 md:px-3", {
-              "bg-primary-container text-on-primary-container": pathname === link.href,
+            className={clsx("flex space-x-2", {
+              "text-blue-900": pathname === link.href,
             })}
           >
-            <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
+            <h1 className="text-xl font-semibold">{link.name}</h1>
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }
