@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import LoginForm from "../ui/long-form/";
-import AntonLogo from "../ui/logo";
+import LoginForm from "@/app/ui/login-form";
+import AntonLogo from "@/app/ui/logo";
 
 export const metadata: Metadata = {
   title: "Login",

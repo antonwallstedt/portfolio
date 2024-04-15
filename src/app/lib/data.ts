@@ -1,6 +1,6 @@
 import { unstable_noStore as noStore } from "next/cache";
 import { connectToDatabase } from "./mongodb";
-import { Project } from "../models/project";
+import { Project } from "@/app/models/project";
 
 export async function fetchProjects() {
   noStore();

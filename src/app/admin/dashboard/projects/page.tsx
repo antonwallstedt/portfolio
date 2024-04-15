@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <div className="w-full items-center flex flex-col">
-      <Link href={`/admin/dashboard/projects/create`} className="bg-blue-500 text-white rounded-md px-3 py-1">
+      <Link href={`/admin/dashboard/projects/create`} className="bg-blue-500 text-white rounded-md px-3 py-1 drop-shadow-md">
         Add Project
       </Link>
       <Suspense>
