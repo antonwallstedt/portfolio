@@ -1,8 +1,8 @@
 import { HomeIcon, PowerIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import NavLinks from "./navLinks";
+import NavLinks from "./nav-links";
 import { signOut } from "@@/auth";
-import AntonLogo from "../antonLogo";
+import AntonLogo from "../logo";
 
 export default function SideNav() {
   return (
