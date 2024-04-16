@@ -35,6 +35,7 @@ const ProjectFormSchema = z.object({
 });
 
 const UpdateProject = ProjectFormSchema.omit({ id: true });
+const CreateProject = ProjectFormSchema.omit({ id: true });
 
 export type State = {
   errors?: {
@@ -79,6 +80,53 @@ export async function updateProject(id: string, prevState: State, formData: Form
     });
   } catch (err) {
     return { message: "Database error: Failed to update project." };
+  }
+
+  revalidatePath("/admin/dashboard/projects");
+  redirect("/admin/dashboard/projects");
+}
+
+export async function deleteProject(id: string) {
+  try {
+    connectToDatabase();
+    await Project.findByIdAndDelete(id);
+    revalidatePath("/admin/dashboard/projects");
+  } catch (err) {
+    console.error("Database error: Failed to delete project", err);
+  }
+}
+
+export async function createProject(prevState: State, formData: FormData) {
+  const validatedFields = CreateProject.safeParse({
+    title: formData.get("title"),
+    subtitle: formData.get("subtitle"),
+    description: formData.get("description"),
+    longDescription: formData.get("longDescription"),
+    imageSrc: formData.get("imageSrc"),
+    stack: formData.get("stack"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing fields. Failed to create project",
+    };
+  }
+
+  const newProject = new Project({
+    title: validatedFields.data.title,
+    subtitle: validatedFields.data.subtitle,
+    description: validatedFields.data.description,
+    longDescription: validatedFields.data.longDescription,
+    imageSrc: validatedFields.data.imageSrc,
+    stack: validatedFields.data.stack,
+  });
+
+  try {
+    connectToDatabase();
+    await newProject.save();
+  } catch (err) {
+    console.error("Database error: Failed to create project", err);
   }
 
   revalidatePath("/admin/dashboard/projects");

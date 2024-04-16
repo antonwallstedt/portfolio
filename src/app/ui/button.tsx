@@ -1,4 +1,6 @@
 import clsx from "clsx";
+import { deleteProject } from "../lib/actions";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -15,5 +17,17 @@ export function Button({ children, className, ...rest }: ButtonProps) {
     >
       {children}
     </button>
+  );
+}
+
+export function DeleteProject({ id }: { id: string }) {
+  const deleteProjectWithId = deleteProject.bind(null, id);
+  return (
+    <form action={deleteProjectWithId}>
+      <button className="rounded-md border p-2 hover:bg-gray-100">
+        <span className="sr-only">Delete</span>
+        <TrashIcon className="w-5" />
+      </button>
+    </form>
   );
 }

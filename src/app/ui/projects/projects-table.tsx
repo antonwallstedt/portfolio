@@ -1,6 +1,7 @@
 import { fetchProjects } from "@/app/lib/data";
 import { Cog6ToothIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import { DeleteProject } from "../button";
 
 export default async function ProjectsTable() {
   const projects = await fetchProjects();
@@ -13,9 +14,12 @@ export default async function ProjectsTable() {
             <h1 className="text-xl font-medium mb-2">{project.title}</h1>
             <p className="text-lg mb-4">{project.subtitle}</p>
             <p className="mb-4">{project.description}</p>
-            <Link href={`/admin/dashboard/projects/${project.id}/edit`} className="bg-neutral-300 px-3 py-1 rounded-md flex items-center text-sm absolute bottom-0 drop-shadow-sm">
-              Edit <Cog6ToothIcon width={15} className="ml-2" />
-            </Link>
+            <div className="absolute bottom-0 flex flex-row space-x-3">
+              <Link href={`/admin/dashboard/projects/${project.id}/edit`} className="bg-neutral-300 px-3 py-1 rounded-md flex items-center text-sm  drop-shadow-sm">
+                Edit <Cog6ToothIcon width={15} className="ml-2" />
+              </Link>
+              <DeleteProject id={project.id} />
+            </div>
           </div>
         </div>
       ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { ClockIcon, HomeIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { ClockIcon, HomeIcon, PaperClipIcon, PencilIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,6 +9,7 @@ const links = [
   { name: "Home", href: "/admin/dashboard/home", icon: HomeIcon },
   { name: "Projects", href: "/admin/dashboard/projects", icon: PencilIcon },
   { name: "Timeline", href: "/admin/dashboard/timeline", icon: ClockIcon },
+  { name: "Experience", href: "/admin/dashboard/experience", icon: PaperClipIcon },
 ];
 
 export default function NavLinks() {
