@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 async function seedAdmin() {
-  mongoose.connect(process.env.MONGODB_URI);
+  mongoose.connect(process.env.MONGO_URI);
 
   const userSchema = new mongoose.Schema({
     username: String,
@@ -27,5 +27,8 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("An error occurred while attempting to seed the database:", err);
+  console.error(
+    "An error occurred while attempting to seed the database:",
+    err
+  );
 });
